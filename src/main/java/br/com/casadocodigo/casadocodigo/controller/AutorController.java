@@ -29,14 +29,15 @@ public class AutorController {
     @Autowired
     private AutorRepository autorRepository;
 
-    @Autowired
+    /*@Autowired
     private ValidaEmailDuplicadoAutor emailDuplicadoAutorValidator;
 
-    /* fazer configurações adicionais e customizadas. utilizado no primeiro request */
+    //fazer configurações adicionais e customizadas. utilizado no primeiro request
     @InitBinder
     public void init(WebDataBinder binder){
         binder.addValidators(emailDuplicadoAutorValidator);
     }
+    */
 
     @Transactional
     @PostMapping
