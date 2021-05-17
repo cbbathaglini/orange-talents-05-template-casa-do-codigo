@@ -1,4 +1,4 @@
-package br.com.casadocodigo.casadocodigo.validacao;
+package br.com.casadocodigo.casadocodigo.validarErros;
 
 public class ErroAPI {
 

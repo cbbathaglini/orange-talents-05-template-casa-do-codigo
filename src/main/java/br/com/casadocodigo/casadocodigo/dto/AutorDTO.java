@@ -31,6 +31,10 @@ public class AutorDTO {
         return new Autor(this.nome, this.email, this.descricao);
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public String toString() {
         return "AutorDTO{" +
