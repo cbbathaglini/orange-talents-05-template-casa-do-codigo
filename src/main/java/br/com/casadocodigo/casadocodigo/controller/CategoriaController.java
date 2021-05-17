@@ -22,7 +22,7 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
+    /*@Autowired
     private ValidaNomeCategoriaDuplicada categoriaDuplicaValidator;
 
 
@@ -30,6 +30,7 @@ public class CategoriaController {
     public void init(WebDataBinder binder){
         binder.addValidators(categoriaDuplicaValidator);
     }
+     */
 
     @Transactional
     @PostMapping

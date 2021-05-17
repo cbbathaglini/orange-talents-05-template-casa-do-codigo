@@ -1,6 +1,8 @@
 package br.com.casadocodigo.casadocodigo.dto;
 
 import br.com.casadocodigo.casadocodigo.model.Autor;
+import br.com.casadocodigo.casadocodigo.model.Categoria;
+import br.com.casadocodigo.casadocodigo.validacao.UniqueValue;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.*;
@@ -12,6 +14,7 @@ public class AutorDTO {
 
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Autor.class, fieldName = "email", message = "O email informado já existe")
     private String email;
 
     @NotBlank @Size(max = 400)
