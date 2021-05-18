@@ -40,10 +40,14 @@ public class Livro {
     @ManyToOne
     private Autor autor;
 
+
     public Livro() {
     }
 
-    public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String ISBN, LocalDate dataPublicacao) {
+    public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo,
+                 String sumario, @NotNull @Min(20)  BigDecimal preco, @NotNull @Min(100)  Integer numeroPaginas, @NotBlank
+                         String ISBN, @Future LocalDate dataPublicacao,
+                 @NotNull Autor autor, @NotNull Categoria categoria) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -51,6 +55,47 @@ public class Livro {
         this.numeroPaginas = numeroPaginas;
         this.ISBN = ISBN;
         this.dataPublicacao = dataPublicacao;
+        this.autor = autor;
+        this.categoria = categoria;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public String getSumario() {
+        return sumario;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public Integer getNumeroPaginas() {
+        return numeroPaginas;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public Autor getAutor() {
+        return autor;
     }
 }

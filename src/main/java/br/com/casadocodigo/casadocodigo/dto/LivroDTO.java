@@ -3,10 +3,13 @@ package br.com.casadocodigo.casadocodigo.dto;
 import br.com.casadocodigo.casadocodigo.model.Autor;
 import br.com.casadocodigo.casadocodigo.model.Categoria;
 import br.com.casadocodigo.casadocodigo.model.Livro;
+import br.com.casadocodigo.casadocodigo.validacao.ExistsId;
 import br.com.casadocodigo.casadocodigo.validacao.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.geo.Shape;
+import org.springframework.util.Assert;
 
+import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
 import java.awt.*;
 import java.math.BigDecimal;
@@ -42,14 +45,20 @@ public class LivroDTO {
     private LocalDate dataPublicacao;
 
     @NotNull
+    @ExistsId(domainClass = Categoria.class, fieldName = "id", message = "O identificador da categoria não foi informado")
     private Long idCategoria;
 
     @NotNull
+    @ExistsId(domainClass = Categoria.class, fieldName = "id", message = "O identificador do autor não foi informado")
     private Long idAutor;
 
 
-    public LivroDTO(@NotBlank String titulo,  @NotBlank @Size(max = 500) String resumo, String sumario, @NotBlank @Min(20) BigDecimal preco,
-                    @NotBlank  @Min(100) Integer numeroPaginas, @NotBlank String ISBN,@NotNull Long idCategoria, @NotNull Long idAutor) {
+    public LivroDTO(@NotBlank String titulo,
+                            @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
+                            @NotNull @Min(20) BigDecimal preco, @Min(100) int numeroPaginas,
+                            @NotBlank String ISBN, @NotNull Long idCategoria,
+                            @NotNull Long idAutor) {
+        super();
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -60,8 +69,14 @@ public class LivroDTO {
         this.idAutor = idAutor;
     }
 
-    public Livro converter(){
-        return  new Livro(this.titulo, this.resumo, this.sumario, this.preco, this.numeroPaginas, this.ISBN, this.dataPublicacao);
+    public Livro converter(EntityManager em) {
+        @NotNull Autor autor = em.find(Autor.class, idAutor);
+        @NotNull Categoria categoria = em.find(Categoria.class, idCategoria);
+
+        Assert.state(autor!=null,"Você esta querendo cadastrar um livro para um autor que nao existe no banco "+idAutor);
+        Assert.state(categoria!=null,"Você esta querendo cadastrar um livro para uma categoria que nao existe no banco "+idCategoria);
+
+        return new Livro(titulo, resumo, sumario, preco, numeroPaginas, ISBN, dataPublicacao, autor, categoria);
     }
 
 
