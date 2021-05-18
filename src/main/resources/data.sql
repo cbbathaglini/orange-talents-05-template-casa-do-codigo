@@ -7,6 +7,13 @@ INSERT INTO CATEGORIA(nome) VALUES('Terror');
 INSERT INTO CATEGORIA(nome) VALUES('Ação');
 INSERT INTO CATEGORIA(nome) VALUES('Comédia');
 
+
+INSERT INTO PAIS(nome) VALUES('Argélia');
+INSERT INTO PAIS(nome) VALUES('Somália');
+INSERT INTO PAIS(nome) VALUES('Zâmbia');
+INSERT INTO PAIS(nome) VALUES('Benin');
+INSERT INTO PAIS(nome) VALUES('Brasil');
+
 /*
 INSERT INTO LIVRO(titulo,resumo,sumario,preco,numeroPaginas,ISBN,dataPublicacao,idCategoria,idAutor) VALUES
     ('Livro x','resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo resumo',

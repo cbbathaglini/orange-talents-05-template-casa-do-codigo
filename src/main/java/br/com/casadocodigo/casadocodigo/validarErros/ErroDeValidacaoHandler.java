@@ -50,7 +50,8 @@ public class ErroDeValidacaoHandler {
 	@ExceptionHandler( HttpMessageNotReadableException.class)
 	public String handle(HttpMessageNotReadableException exception) {
 
-		return "Erro: HttpMessageNotReadableException";
+		return "Erro: HttpMessageNotReadableException: mensagem" + exception.getMessage()+ "|| "+
+				exception.getHttpInputMessage();
 	}
 
 }

@@ -49,7 +49,7 @@ public class LivroDTO {
     private Long idCategoria;
 
     @NotNull
-    @ExistsId(domainClass = Categoria.class, fieldName = "id", message = "O identificador do autor não foi informado")
+    @ExistsId(domainClass = Autor.class, fieldName = "id", message = "O identificador do autor não foi informado")
     private Long idAutor;
 
 

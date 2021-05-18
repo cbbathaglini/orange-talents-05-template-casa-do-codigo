@@ -30,7 +30,7 @@ public class Livro {
     private Integer numeroPaginas;
 
     @NotBlank
-    private String ISBN; //International Standard Book Number
+    private String isbn; //International Standard Book Number
 
     @Future
     private LocalDate dataPublicacao;
@@ -47,14 +47,14 @@ public class Livro {
 
     public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo,
                  String sumario, @NotNull @Min(20)  BigDecimal preco, @NotNull @Min(100)  Integer numeroPaginas, @NotBlank
-                         String ISBN, @Future LocalDate dataPublicacao,
+                         String isbn, @Future LocalDate dataPublicacao,
                  @NotNull Autor autor, @NotNull Categoria categoria) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
         this.preco = preco;
         this.numeroPaginas = numeroPaginas;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.dataPublicacao = dataPublicacao;
         this.autor = autor;
         this.categoria = categoria;
@@ -85,7 +85,7 @@ public class Livro {
     }
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
 
     public LocalDate getDataPublicacao() {
@@ -110,7 +110,7 @@ public class Livro {
                 ", sumario='" + sumario + '\'' +
                 ", preco=" + preco +
                 ", numeroPaginas=" + numeroPaginas +
-                ", ISBN='" + ISBN + '\'' +
+                ", ISBN='" + isbn + '\'' +
                 ", dataPublicacao=" + dataPublicacao +
                 ", categoria=" + categoria +
                 ", autor=" + autor +

@@ -9,16 +9,19 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
 
-    private String domainAttribute;
-    private Class<?> klass;
+/*
+public class UniqueStateValidator implements ConstraintValidator<UniqueState, Object> {
 
-    @PersistenceContext
-    private EntityManager em;
+        private String domainAttribute;
+        private Class<?> klass;
+
+        @PersistenceContext
+        private EntityManager em;
+
 
     @Override
-    public void initialize(ExistsId parametros) {
+    public void initialize(UniqueState parametros) {
         domainAttribute = parametros.fieldName();
         klass = parametros.domainClass();
     }
@@ -26,7 +29,6 @@ public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> 
     @Override
     public boolean isValid(Object valor, ConstraintValidatorContext contexto) {
         Query q = em.createQuery("select 1 from "+klass.getName()+" where "+domainAttribute+"=:value");
-        System.out.println("QEURY:"+ q);
         q.setParameter("value", valor);
 
         List<?> list = q.getResultList();
@@ -35,3 +37,5 @@ public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> 
         return !list.isEmpty();
     }
 }
+
+ */
