@@ -1,8 +1,10 @@
 package br.com.casadocodigo.casadocodigo.dto;
 
+import br.com.casadocodigo.casadocodigo.model.Categoria;
 import br.com.casadocodigo.casadocodigo.model.Cliente;
 import br.com.casadocodigo.casadocodigo.model.Estado;
 import br.com.casadocodigo.casadocodigo.model.Pais;
+import br.com.casadocodigo.casadocodigo.validacao.ExistsId;
 import br.com.casadocodigo.casadocodigo.validacao.UniqueValue;
 
 import javax.persistence.EntityManager;
@@ -37,6 +39,7 @@ public class ClienteDTO {
     private String cidade;
 
     @NotNull
+    @ExistsId(domainClass = Pais.class, fieldName = "id", message = "O identificador do país não foi informado")
     private Long idPais;
 
     private Long idEstado;
@@ -66,9 +69,12 @@ public class ClienteDTO {
 
     public Cliente converter(EntityManager em){
         Pais pais = em.find(Pais.class, idPais);
-        Estado estado = em.find(Estado.class, idEstado);
+        if(idEstado != null){
+            Estado estado = em.find(Estado.class, idEstado);
+            return new Cliente(email, nome, sobrenome,documento,endereco,complemento,cidade,pais, estado,telefone,CEP);
+        }
 
-        return new Cliente(email, nome, sobrenome,documento,endereco,complemento,cidade,pais, estado,telefone,CEP);
+        return new Cliente(email, nome, sobrenome,documento,endereco,complemento,cidade,pais,telefone,CEP);
     }
 
 

@@ -2,12 +2,11 @@ package br.com.casadocodigo.casadocodigo.model;
 
 import br.com.casadocodigo.casadocodigo.validacao.UniqueValue;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Email;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Entity
 public class Cliente {
 
     @Id
@@ -23,8 +22,13 @@ public class Cliente {
     private String endereco;
     private String complemento;
     private String cidade;
+
+    @ManyToOne
     private Pais pais;
+
+    @ManyToOne
     private Estado estado;
+
     private String telefone;
     private String CEP;
 
@@ -32,7 +36,7 @@ public class Cliente {
     }
 
     public Cliente(@NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome, @NotBlank String documento, @NotBlank String endereco,
-                   @NotBlank String complemento, String cidade, Pais pais, Estado estado, @NotBlank String telefone, @NotBlank String CEP) {
+                   @NotBlank String complemento, String cidade, Pais pais, @NotBlank String telefone, @NotBlank String CEP) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -41,9 +45,25 @@ public class Cliente {
         this.complemento = complemento;
         this.cidade = cidade;
         this.pais = pais;
-        this.estado = estado;
         this.telefone = telefone;
         this.CEP = CEP;
+    }
+    public Cliente(@NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome, @NotBlank String documento, @NotBlank String endereco,
+                   @NotBlank String complemento, String cidade, Pais pais,Estado estado, @NotBlank String telefone, @NotBlank String CEP) {
+        this.email = email;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.documento = documento;
+        this.endereco = endereco;
+        this.complemento = complemento;
+        this.cidade = cidade;
+        this.pais = pais;
+        this.telefone = telefone;
+        this.CEP = CEP;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Pais getPais() {

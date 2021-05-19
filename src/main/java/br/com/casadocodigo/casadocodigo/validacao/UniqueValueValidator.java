@@ -30,8 +30,8 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Ob
     @Override
     @Transactional
     public boolean isValid(Object valor, ConstraintValidatorContext contexto) {
-        Query q = em.createQuery("SELECT 1 FROM " + klass.getName() + " WHERE " + domainAttribute + " = :value" );
-        q.setParameter("value", valor);
+        Query q = em.createQuery("SELECT 1 FROM " + klass.getName() + " WHERE " + domainAttribute + " = :valueparam" );
+        q.setParameter("valueparam", valor);
         List<?> listaResultados = q.getResultList();
         //System.out.println("listaresultados: " + listaResultados.size());
         Assert.state(listaResultados.size() <= 1, "Foi encontrado(a) mais de um(a) " + klass.getName() + " com o atributo "+ domainAttribute);

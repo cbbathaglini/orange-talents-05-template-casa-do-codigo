@@ -1,13 +1,12 @@
 package br.com.casadocodigo.casadocodigo.controller;
 
 import br.com.casadocodigo.casadocodigo.dto.ClienteDTO;
-import br.com.casadocodigo.casadocodigo.dto.EstadoDTO;
+import br.com.casadocodigo.casadocodigo.dtoresponse.ClienteDTOResponse;
 import br.com.casadocodigo.casadocodigo.model.Cliente;
-import br.com.casadocodigo.casadocodigo.model.Estado;
-import br.com.casadocodigo.casadocodigo.repository.ClienteRepository;
-import br.com.casadocodigo.casadocodigo.repository.EstadoRepository;
-import br.com.casadocodigo.casadocodigo.validacao.ValidaEstadoPais;
-import br.com.casadocodigo.casadocodigo.validacao.ValidaExisteEstado;
+import br.com.casadocodigo.casadocodigo.validacao.ValidaExisteEstadoNoPais;
+import br.com.casadocodigo.casadocodigo.validacao.ValidaNaoInformouEstado;
+import br.com.casadocodigo.casadocodigo.validacao.ValidaPaisContemEstado;
+import br.com.casadocodigo.casadocodigo.validacao.ValidaPaisSemEstado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,21 +24,30 @@ public class ClienteController {
     private EntityManager em;
 
     @Autowired
-    private ValidaExisteEstado existeEstadoValidator;
+    private ValidaNaoInformouEstado validaNaoInformouEstado;
+
+    @Autowired
+    private ValidaPaisSemEstado validaPaisSemEstado;
+
+    @Autowired
+    private ValidaPaisContemEstado validaPaisContemEstado;
+
 
     @InitBinder
     public void init(WebDataBinder binder){
-        binder.addValidators(existeEstadoValidator);
+        binder.addValidators(validaNaoInformouEstado, validaPaisSemEstado,validaPaisContemEstado);
     }
 
 
     @Transactional
     @PostMapping
-    public ResponseEntity cadastra(@RequestBody @Valid ClienteDTO clienteDTO){
+    public ResponseEntity<ClienteDTOResponse> cadastra(@RequestBody @Valid ClienteDTO clienteDTO){
         Cliente cliente = clienteDTO.converter(em);
         if(cliente != null) {
             em.persist(cliente);
-            return ResponseEntity.ok().build();
+            //System.out.println("Cliente: ");
+            //System.out.println(cliente.toString());
+            return ResponseEntity.ok(new ClienteDTOResponse(cliente));
         }
         return ResponseEntity.notFound().build();
     }

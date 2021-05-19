@@ -1,14 +1,10 @@
 package br.com.casadocodigo.casadocodigo.controller;
 
 
-import br.com.casadocodigo.casadocodigo.dto.AutorDTO;
 import br.com.casadocodigo.casadocodigo.dto.EstadoDTO;
-import br.com.casadocodigo.casadocodigo.model.Autor;
 import br.com.casadocodigo.casadocodigo.model.Estado;
-import br.com.casadocodigo.casadocodigo.repository.AutorRepository;
 import br.com.casadocodigo.casadocodigo.repository.EstadoRepository;
-import br.com.casadocodigo.casadocodigo.repository.PaisRepository;
-import br.com.casadocodigo.casadocodigo.validacao.ValidaEstadoPais;
+import br.com.casadocodigo.casadocodigo.validacao.ValidaExisteEstadoNoPais;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,7 +25,7 @@ public class EstadoController {
     private EstadoRepository estadoRepository;
 
     @Autowired
-    private ValidaEstadoPais estadoPaisValidator;
+    private ValidaExisteEstadoNoPais estadoPaisValidator;
 
     @InitBinder
     public void init(WebDataBinder binder){
