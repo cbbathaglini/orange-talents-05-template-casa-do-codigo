@@ -26,7 +26,7 @@ public class ValidaPaisSemEstado implements Validator {
         public void validate(Object target, Errors errors) {
             if(errors.hasErrors()){ return; }
             ClienteDTO clienteDTO = (ClienteDTO) target;
-            
+
             //se foi informado o país
             if(clienteDTO.getIdPais() != null) {
                 List<Estado> listaEstados = estadoRepository.findEstadosNoPais(clienteDTO.getIdPais());

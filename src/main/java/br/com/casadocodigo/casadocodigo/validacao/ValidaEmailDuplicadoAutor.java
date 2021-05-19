@@ -28,7 +28,6 @@ public class ValidaEmailDuplicadoAutor implements Validator {
     public void validate(Object target, Errors errors) {
         //nenhum erro de validação até o momento
         if(errors.hasErrors()){ return; }
-
         AutorDTO autorDto = (AutorDTO) target;
         Optional<Autor> autorOp = autorRepository.findByEmail(autorDto.getEmail());
         if(autorOp.isPresent()){
