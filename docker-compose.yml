@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  mlmariadbv2:
+    image: mariadb:10.2
+    networks:
+      - casadocodigo-mariadb
+    environment:
+      #MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: casadocodigo
+
+
+  casadocodigoimg:
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    image: casadocodigoimg
+    ports:
+      - 8082:8080
+    networks:
+      - casadocodigo-mariadb
+    environment:
+      DB_DATABASE: casadocodigo
+      DB_USER: root
+      DB_HOST: jdbc:mariadb://mlmariadbv2/casadocodigo
+      DB_PASSWORD: password
+    depends_on:
+      - mlmariadbv2
+
+networks:
+  casadocodigo-mariadb:
+    driver: bridge

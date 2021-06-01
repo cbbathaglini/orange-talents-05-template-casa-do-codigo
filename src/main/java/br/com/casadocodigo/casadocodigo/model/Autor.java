@@ -30,6 +30,8 @@ public class Autor {
 
     private LocalDateTime instanteCriacao = LocalDateTime.now();
 
+
+
     public Autor(@NotBlank String nome, @NotBlank @Email String email, @NotBlank  @Size(max = 400) String descricao) {
         this.nome = nome;
         this.email = email;

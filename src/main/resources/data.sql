@@ -1,4 +1,4 @@
-INSERT INTO AUTOR(nome, email, descricao) VALUES('john_snow', 'john_snow@email.com', '123456');
+/*INSERT INTO AUTOR(nome, email, descricao) VALUES('john_snow', 'john_snow@email.com', '123456');
 INSERT INTO AUTOR(nome, email, descricao) VALUES('aria_stark', 'aria_stark@email.com', '123456');
 INSERT INTO AUTOR(nome, email, descricao) VALUES('brandon_stark', 'brandon_stark@email.com', '123456');
 
@@ -13,7 +13,7 @@ INSERT INTO PAIS(nome) VALUES('Somália');
 INSERT INTO PAIS(nome) VALUES('Zâmbia');
 INSERT INTO PAIS(nome) VALUES('Benin');
 INSERT INTO PAIS(nome) VALUES('Brasil');
-
+*/
 
 /*INSERT INTO ESTADO(nome,pais) VALUES('Rio Grande do Sul',5);*/
 
